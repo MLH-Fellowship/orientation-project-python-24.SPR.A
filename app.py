@@ -85,7 +85,12 @@ def education():
 @app.route('/resume/skill', methods=['GET', 'POST'])
 def skill():
     '''
-    Handles Skill requests
+    Route for creating a new skill and fetching all skills.
+
+    Returns
+    -------
+    json
+        The skill(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
         return jsonify({})
