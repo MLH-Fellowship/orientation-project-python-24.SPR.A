@@ -3,11 +3,15 @@
 Refer to the Fellowship LMS for information!
 
 ## Setup
-
+### Install Dependencies
+Use `Pipenv` to manage virtual environment and install the dependencies. More details can be found in [Pipenv Documentation](https://pipenv.pypa.io/en/latest/).
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+python3 -m pip install pipenv
+python3 -m pipenv install --dev
+```
+### Activate Virtual Environment
+```
+python3 -m pipenv shell
 ```
 
 ## Run
@@ -15,12 +19,12 @@ pip install -r requirements.txt
 flask run
 ```
 
-### Run tests
+## Run tests
 ```
 pytest test_pytest.py
 ```
 
-### Run Linter
+## Run Linter
 ```
 pylint *.py
 ```
