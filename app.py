@@ -48,7 +48,12 @@ def hello_world():
 @app.route('/resume/experience', methods=['GET', 'POST'])
 def experience():
     '''
-    Handle experience requests
+    Route for creating a new experience and fetching all experiences.
+
+    Returns
+    -------
+    json
+        The experience(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
         return jsonify()
