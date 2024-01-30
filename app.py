@@ -66,7 +66,12 @@ def experience():
 @app.route('/resume/education', methods=['GET', 'POST'])
 def education():
     '''
-    Handles education requests
+    Route for creating a new education and fetching all educations.
+
+    Returns
+    -------
+    json
+        The education(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
         return jsonify({})
