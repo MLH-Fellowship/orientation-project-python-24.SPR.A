@@ -56,7 +56,7 @@ def experience():
         The experience(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
-        return jsonify()
+        return jsonify(data.get('experience',[]))
 
     if request.method == 'POST':
         return jsonify({})
