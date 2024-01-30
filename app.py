@@ -39,7 +39,7 @@ def hello_world():
     Returns
     -------
     json
-        JSON text message.
+        A simple test route that returns a JSON response with a greeting message.
     '''
 
     return jsonify({"message": "Hello, World!"})
