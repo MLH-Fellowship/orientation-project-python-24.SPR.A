@@ -56,7 +56,17 @@ def experience():
         The experience(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
-        return jsonify(data.get('experience',[]))
+        index = request.args.get('index')
+        experiences = data.get('experience',[])
+        if index is not None:
+            try:
+                index = int(index)
+                if 0 <= index < len(experiences):
+                    return jsonify(experiences[index])
+                return jsonify({'error':'Index out of range'})
+            except ValueError:
+                return jsonify({'error':'Invalid index'})
+        return jsonify(experiences)
 
     if request.method == 'POST':
         return jsonify({})
