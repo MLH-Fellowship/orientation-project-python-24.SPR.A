@@ -34,8 +34,14 @@ data = {
 @app.route('/test')
 def hello_world():
     '''
-    Returns a JSON test message
+    A simple test route that returns a JSON response with a greeting message.
+
+    Returns
+    -------
+    json
+        JSON text message.
     '''
+
     return jsonify({"message": "Hello, World!"})
 
 
