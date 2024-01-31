@@ -63,9 +63,9 @@ def experience():
                 index = int(index)
                 if 0 <= index < len(experiences):
                     return jsonify(experiences[index])
-                return jsonify({'error':'Index out of range'})
+                return jsonify({'error':'Experience does not exist'}), 404
             except ValueError:
-                return jsonify({'error':'Invalid index'})
+                return jsonify({'error':'Experience does not exist'}), 404
         return jsonify(experiences)
 
     if request.method == 'POST':
