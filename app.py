@@ -93,8 +93,19 @@ def skill():
         The skill(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
-        return jsonify({})
+        skills = data.get('skill', [])
+        index = request.args.get('index')
 
+        # Returns a specific skill if the index was specified by the user
+        if index is not None:
+            try:
+                index = int(index)
+                return jsonify(skills[index])
+            except:
+                return jsonify({'error': 'skill not found'}), 404
+
+        return jsonify({})
+        
     if request.method == 'POST':
         return jsonify({})
 
