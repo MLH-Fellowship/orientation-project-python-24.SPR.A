@@ -14,8 +14,8 @@ def load_data(data_path):
 
     Returns
     -------
-    dict
-        A Python dictionary representing the JSON data.
+    dict or None
+        A Python dictionary representing the JSON data, or `None` if an error occurs.
     '''
     with open(data_path, 'r', encoding='utf-8') as file:
         return json.load(file)
