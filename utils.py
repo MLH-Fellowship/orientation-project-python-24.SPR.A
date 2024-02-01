@@ -44,5 +44,12 @@ def save_data(data_path, update_data):
     bool
         `True` representing successfully saved, or `False` if an error occurs.
     '''
-    with open(data_path, 'w', encoding='utf-8') as file:
-        json.dump(update_data, file)
+    try:
+        with open(data_path, 'w', encoding='utf-8') as file:
+            json.dump(update_data, file)
+        return True
+    except json.JSONDecodeError:
+        print(f"Error: Unable to encode data as JSON in {data_path}")
+    except Exception as e: #pylint: disable=broad-exception-caught
+        print(f"An unexpected error occurred: {str(e)}")
+    return False
