@@ -57,15 +57,15 @@ def experience():
     '''
     if request.method == 'GET':
         index = request.args.get('index')
-        experiences = data.get('experience', [])
+        experiences = data.get('experience',[])
         if index is not None:
             try:
                 index = int(index)
                 if 0 <= index < len(experiences):
                     return jsonify(experiences[index])
-                return jsonify({'error': 'Experience does not exist'}), 404
+                return jsonify({'error':'Experience does not exist'}), 404
             except ValueError:
-                return jsonify({'error': 'Experience does not exist'}), 404
+                return jsonify({'error':'Experience does not exist'}), 404
         return jsonify(experiences)
 
     if request.method == 'POST':
@@ -95,7 +95,8 @@ def education():
                 return jsonify({'error': 'Education does not exist'}), 404
             except ValueError:
                 return jsonify({'error': 'Education does not exist'}), 404
-        return jsonify({})
+
+        return jsonify(data.get('education', []))
 
     if request.method == 'POST':
         return jsonify({})
