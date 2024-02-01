@@ -2,7 +2,8 @@
 Flask Application
 '''
 from flask import Flask, jsonify, request
-from models import Experience, Education, Skill
+from models import Experience, Education, Skill #pylint: disable=unused-import
+from utils import load_data, save_data #pylint: disable=unused-import
 
 app = Flask(__name__)
 
