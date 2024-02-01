@@ -84,7 +84,7 @@ def education():
         The education(s) as a JSON object, or an error message.
     '''
     if request.method == 'GET':
-        return jsonify({})
+        return jsonify(data.get('education', []))
 
     if request.method == 'POST':
         return jsonify({})
