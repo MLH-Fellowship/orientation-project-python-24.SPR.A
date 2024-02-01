@@ -100,8 +100,10 @@ def skill():
         if index is not None:
             try:
                 index = int(index)
-                return jsonify(skills[index])
-            except:
+                if 0 <= index < len(skills):
+                    return jsonify(skills[index])    
+                return jsonify({'error': 'skill not found'}), 404
+            except ValueError:
                 return jsonify({'error': 'skill not found'}), 404
 
         return jsonify({})
