@@ -50,16 +50,16 @@ def test_education():
         "grade": "86%",
         "logo": "example-logo.png"
     }
-    item_id = app.test_client().post('/resume/educations',
+    item_id = app.test_client().post('/resume/education',
                                      json=example_education).json['id']
 
-    response = app.test_client().get('/resume/educations')
+    response = app.test_client().get('/resume/education')
     assert response.json[item_id] == example_education
 
 
-def test_get_educations(mocker):
+def test_get_education(mocker):
     '''
-    Get all educations and check that it returns the list of educations
+    Get all education and check that it returns the list of educations
     '''
     mock_data = {
         'education': [
@@ -86,7 +86,7 @@ def test_get_educations(mocker):
             "start_date": 'September 2023',
         }
     ]
-    response = app.test_client().get('/resume/educations')
+    response = app.test_client().get('/resume/education')
     assert response.status_code == 200
     assert response.json == expected_response
 

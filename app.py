@@ -73,7 +73,7 @@ def experience():
 
     return jsonify({})
 
-@app.route('/resume/educations', methods=['GET', 'POST'])
+@app.route('/resume/education', methods=['GET', 'POST'])
 def education():
     '''
     Route for creating a new education and fetching all educations.
