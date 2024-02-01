@@ -41,7 +41,8 @@ def save_data(data_path, update_data):
 
     Returns
     -------
-    None
+    bool
+        `True` representing successfully saved, or `False` if an error occurs.
     '''
     with open(data_path, 'w', encoding='utf-8') as file:
         json.dump(update_data, file)
