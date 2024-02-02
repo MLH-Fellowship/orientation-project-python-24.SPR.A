@@ -2,33 +2,12 @@
 Flask Application
 '''
 from flask import Flask, jsonify, request
-from models import Experience, Education, Skill
+from models import Experience, Education, Skill #pylint: disable=unused-import
+from utils import load_data, save_data #pylint: disable=unused-import
 
 app = Flask(__name__)
 
-data = {
-    "experience": [
-        Experience("Software Developer",
-                   "A Cool Company",
-                   "October 2022",
-                   "Present",
-                   "Writing Python Code",
-                   "example-logo.png")
-    ],
-    "education": [
-        Education("Computer Science",
-                  "University of Tech",
-                  "September 2019",
-                  "July 2022",
-                  "80%",
-                  "example-logo.png")
-    ],
-    "skill": [
-        Skill("Python",
-              "1-2 Years",
-              "example-logo.png")
-    ]
-}
+data = load_data('data.json')
 
 
 @app.route('/test')
