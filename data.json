@@ -1,6 +1,7 @@
 {
     "experience": [
         {
+            "id": 1,
             "company": "A Cool Company",
             "description": "Writing Python Code",
             "end_date": "Present",
@@ -11,6 +12,7 @@
     ],
     "education": [
         {
+            "id": 1,
             "course": "Computer Science",
             "school": "University of Tech",
             "start_date": "September 2019",
@@ -21,6 +23,7 @@
     ],
     "skill": [
         {
+            "id": 1,
             "name": "Python",
             "proficiency": "1-2 Years",
             "logo": "example-logo.png"

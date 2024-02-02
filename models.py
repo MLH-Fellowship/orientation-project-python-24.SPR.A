@@ -12,6 +12,7 @@ class Experience:
     '''
     Experience Class
     '''
+    id: int
     title: str
     company: str
     start_date: str
@@ -25,6 +26,7 @@ class Education:
     '''
     Education Class
     '''
+    id: int
     course: str
     school: str
     start_date: str
@@ -38,6 +40,7 @@ class Skill:
     '''
     Skill Class
     '''
+    id: int
     name: str
     proficiency: str
     logo: str
