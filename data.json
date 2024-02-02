@@ -1,0 +1,29 @@
+{
+    "experience": [
+        {
+            "company": "A Cool Company",
+            "description": "Writing Python Code",
+            "end_date": "Present",
+            "logo": "example-logo.png",
+            "start_date": "October 2022",
+            "title": "Software Developer"
+        }
+    ],
+    "education": [
+        {
+            "course": "Computer Science",
+            "school": "University of Tech",
+            "start_date": "September 2019",
+            "end_date": "July 2022",
+            "grade": "80%",
+            "logo": "example-logo.png"
+        }
+    ],
+    "skill": [
+        {
+            "name": "Python",
+            "proficiency": "1-2 Years",
+            "logo": "example-logo.png"
+        }
+    ]
+}
