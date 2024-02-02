@@ -105,7 +105,7 @@ def skill():
             except ValueError:
                 return jsonify({'error':'Skill does not exist'}), 404
         return jsonify(skills)
-
+        
     if request.method == 'POST':
         return jsonify({})
 
