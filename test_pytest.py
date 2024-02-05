@@ -1,7 +1,9 @@
 '''
 Tests in Pytest
 '''
+
 from app import app
+from models import Education
 
 
 def test_client():
@@ -53,6 +55,40 @@ def test_education():
 
     response = app.test_client().get('/resume/education')
     assert response.json[item_id] == example_education
+
+
+def test_get_education(mocker):
+    '''
+    Get all education and check that it returns the list of educations
+    '''
+    mock_data = {
+        'education': [
+            Education(
+                'Computer Science',
+                'Western University',
+                'September 2023',
+                'July 2022',
+                '90%',
+                'fake-logo.png',
+            )
+        ]
+    }
+    mocker.patch.dict('app.data', mock_data, clear=True)
+
+    expected_response = [
+        {
+
+            "course": "Computer Science",
+            "end_date": 'July 2022',
+            "grade": "90%",
+            "logo": 'fake-logo.png',
+            "school": 'Western University',
+            "start_date": 'September 2023',
+        }
+    ]
+    response = app.test_client().get('/resume/education')
+    assert response.status_code == 200
+    assert response.json == expected_response
 
 
 def test_skill():

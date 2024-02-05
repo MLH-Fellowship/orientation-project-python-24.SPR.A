@@ -7,7 +7,7 @@ name = "pypi"
 flask = "*"
 pytest = "*"
 pylint = "*"
+pytest-mock = "*"
 
 [dev-packages]
 pipenv = "*"
-
