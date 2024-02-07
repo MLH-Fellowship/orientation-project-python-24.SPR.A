@@ -109,6 +109,20 @@ def test_skill():
     response = app.test_client().get('/resume/skill')
     assert response.json[item_id] == example_skill
 
+    
+def test_skill_delete():
+    '''
+    Delete an existing skill.
+    
+    Check that the skill at that index is either invalid or different.
+    '''
+    example_skill = app.test_client().get('/resume/skill?index=0').json
+
+    app.test_client().delete('/resume/skill?index=0')
+    response = app.test_client().get('/resume/skill?index=0')
+    assert 'error' in response.json or response.json == example_skill
+
+    
 def test_skill_edit():
     '''
     Edit an existing skill and then obtain the skill at that index. 
