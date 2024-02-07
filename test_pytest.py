@@ -109,6 +109,7 @@ def test_skill():
     response = app.test_client().get('/resume/skill')
     assert response.json[item_id] == example_skill
 
+    
 def test_skill_delete():
     '''
     Delete an existing skill.
@@ -120,3 +121,20 @@ def test_skill_delete():
     app.test_client().delete('/resume/skill?index=0')
     response = app.test_client().get('/resume/skill?index=0')
     assert 'error' in response.json or response.json == example_skill
+
+    
+def test_skill_edit():
+    '''
+    Edit an existing skill and then obtain the skill at that index. 
+    
+    Check that it returns the updated skill at that index
+    '''
+    example_skill = {
+        "name": "JavaScript",
+        "proficiency": "2-4 years",
+        "logo": "example-logo.png"
+    }
+
+    app.test_client().put('/resume/skill?index=0', json=example_skill)
+    response = app.test_client().get('/resume/skill?index=0')
+    assert response.json == example_skill

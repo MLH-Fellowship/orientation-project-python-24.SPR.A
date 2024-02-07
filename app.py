@@ -34,6 +34,7 @@ def experience():
     json
         The experience(s) as a JSON object, or an error message.
     '''
+    response = None
     if request.method == 'GET':
         index = request.args.get('index')
         experiences = data.get('experience',[])
@@ -41,18 +42,32 @@ def experience():
             try:
                 index = int(index)
                 if 0 <= index < len(experiences):
-                    return jsonify(experiences[index])
-                return jsonify({'error':'Experience does not exist'}), 404
+                    response = jsonify(experiences[index])
+                else:
+                    response = jsonify({'error':'Experience does not exist'}), 404
             except ValueError:
-                return jsonify({'error':'Experience does not exist'}), 404
-        return jsonify(experiences)
+                response = jsonify({'error':'Experience does not exist'}), 404
+        else:
+            response = jsonify(experiences)
 
     if request.method == 'POST':
-        return jsonify({})
+        required_fields = ['title','company','start_date','end_date','description','logo']
+        if not request.json:
+            response = jsonify({'error':'Filed Creating Experience'}), 400
+        else:
+            missing_fields = [field.capitalize() for field in required_fields
+                               if field not in request.json]
+            if len(missing_fields) > 0:
+                response = jsonify({'error':f'Missing Field: {missing_fields[0]}'}), 400
+            else:
+                experiences = data.get('experience',[])
+                experience_id = len(experiences)
+                experiences.append(request.json)
+                data['experience'] = experiences
+                response = jsonify({'id':experience_id})
+    return response
 
-    return jsonify({})
-
-
+  
 @app.route('/resume/education', methods=['GET', 'POST'])
 def education():
     '''
@@ -82,8 +97,8 @@ def education():
 
     return jsonify({})
 
-
-@app.route('/resume/skill', methods=['GET', 'POST', 'DELETE'])
+  
+@app.route('/resume/skill', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def skill():
     '''
     Route for creating a new skill and fetching all skills.
@@ -122,6 +137,26 @@ def skill():
             save_data('data.json', data)
             return jsonify(deleted_skill), 200
         except ValueError:
+            return jsonify({'error:': 'Skill does not exist'}), 404
+
+    if request.method == 'PUT':
+        skills = data.get('skill',[])
+        index = request.args.get('index')
+        if index is None or request.json is None:
+            return jsonify({'error:': 'Skill does not exist'}), 404
+        try:
+            index = int(index)
+            if index < 0 or index >= len(skills):
+                return jsonify({'error:': 'Skill does not exist'}), 404
+            skill_dict = request.json
+            updated_skill = {'name': skill_dict['name'],
+                                  'proficiency': skill_dict['proficiency'],
+                                  'logo': skill_dict['logo']}
+            skills[index] = updated_skill
+            data['skill'] = skills
+            save_data('data.json', data)
+            return jsonify(updated_skill), 200
+        except (ValueError, KeyError, TypeError):
             return jsonify({'error:': 'Skill does not exist'}), 404
 
     return jsonify({})
