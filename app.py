@@ -83,7 +83,7 @@ def education():
     return jsonify({})
 
 
-@app.route('/resume/skill', methods=['GET', 'POST'])
+@app.route('/resume/skill', methods=['GET', 'POST', 'PUT'])
 def skill():
     '''
     Route for creating a new skill and fetching all skills.
@@ -108,5 +108,25 @@ def skill():
         
     if request.method == 'POST':
         return jsonify({})
+
+    if request.method == 'PUT':
+        skills = data.get('skill',[])
+        index = request.args.get('index')
+        if index is None or request.json is None:
+            return jsonify({'error:': 'Skill does not exist'}), 404
+        try:
+            index = int(index)
+            if index < 0 or index >= len(skills):
+                return jsonify({'error:': 'Skill does not exist'}), 404
+            skill_dict = request.json
+            updated_skill = {'name': skill_dict['name'],
+                                  'proficiency': skill_dict['proficiency'],
+                                  'logo': skill_dict['logo']}
+            skills[index] = updated_skill
+            data['skill'] = skills
+            save_data('data.json', data)
+            return jsonify(updated_skill), 200
+        except (ValueError, KeyError, TypeError):
+            return jsonify({'error:': 'Skill does not exist'}), 404
 
     return jsonify({})
